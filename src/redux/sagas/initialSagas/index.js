@@ -1,4 +1,4 @@
-import { call, fork, spawn, all, delay } from 'redux-saga/effects';
+import { call, fork, spawn, all, delay, apply } from 'redux-saga/effects';
 
 function* auth() {
 	yield delay(2000);
@@ -8,9 +8,9 @@ function* auth() {
 
 function* loadUsers() {
 	const request = yield call(fetch, 'http://swapi.dev/api/people');
-	const data = yield call([request, request.json]);
+	const data = yield apply(request, request.json);
 
-	console.log(data)
+	console.log(data);
 }
 
 export function* loadBasicData() {
